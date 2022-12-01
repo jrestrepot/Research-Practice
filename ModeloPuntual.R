@@ -22,6 +22,7 @@ dataest$usos <- NULL
 new_df = cbind(dataest,espac$geometry)
 new_df = na.omit(new_df)
 dataest = na.omit(dataest)
+#Commented section was used to remove outliers (just a test)
 #center = colMeans(data)
 #cova = cov(data)
 #dist = mahalanobis(data,center,cova, inverted = FALSE)
@@ -56,15 +57,15 @@ summ(modelo)
 bptest(modelo) #Existe
 vif(modelo)
 ggdensity(modelo$residuals, 
-          main = "Density plot of tooth length",
-          xlab = "Tooth length")
+          main = "Density of residuals",
+          xlab = "Residuals")
 shapiro.test(modelo$residuals)
-modback <- stepAIC(modelo, trace=TRUE, direction="backward")
+modback <- stepAIC(modelo, trace=TRUE, direction="backward") #Did not use modback because it is detrimental to the interpretability of the data.
 AIC(modback)
 summary(modback)
 bptest(modback) #Existe
 vif(modback)
 ggdensity(modback$residuals, 
-          main = "Density plot of tooth length",
-          xlab = "Tooth length")
+          main = "Density of residuals",
+          xlab = "Residuals")
 shapiro.test(modback$residuals)
